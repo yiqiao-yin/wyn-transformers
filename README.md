@@ -192,6 +192,17 @@ transformer.compile(optimizer='adam', loss='sparse_categorical_crossentropy', me
 transformer.fit(sample_data, sample_data, epochs=5)
 ```
 
+### Question-Answer
+
+After the model is trained, it is usually desired to make an inference. This way the user can experience the outcome of the model. To do this, we can use the following code to send a question into the function `predict_text`. The function is designed to tokenize the question, make a prediction using the trained model, and convert the numerical output back to texts.
+
+```python
+# Test the function with the example input
+input_text = "what is the capital of France?"
+predicted_response = predict_text(input_text, transformer, tokenizer, max_length=15)
+print("Predicted Response:", predicted_response)
+```
+
 ## Author 👨‍💻
 
 Yiqiao Yin  
