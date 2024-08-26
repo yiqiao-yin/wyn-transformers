@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "wyn-transformers"
-version = "0.1.3"
+version = "0.1.4"
 description = "The official package to train a transformer from scratch."
 authors = ["Yiqiao Yin <eagle0504@gmail.com>"]
 readme = "README.md"

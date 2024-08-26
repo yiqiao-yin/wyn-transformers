@@ -32,11 +32,30 @@ A package that allows developers to train a transformer model from scratch, tail
 
 ## Folder Directory 📁
 
-- **Main level**: Contains the `README.md` file.
-- **wyn_transformers folder**: 
-  - `transformers.py` — Defines the transformer model and helper functions.
-  - `inference.py` — Provides utilities for making inferences from a trained model and converting tokens back to text.
-  - `push_to_hub.py` — Pushes the trained TensorFlow model to HuggingFace; requires a HuggingFace token.
+Here's the folder directory for your `wyn-transformers` package using the specified style:
+
+```
+wyn-transformers
+├── pyproject.toml
+├── README.md
+├── wyn_transformers
+│   ├── __init__.py
+│   ├── transformers.py
+│   ├── inference.py
+│   └── push_to_hub.py
+└── tests
+    └── __init__.py
+```
+
+- **`pyproject.toml`**: The configuration file for the Poetry package manager, which includes metadata and dependencies for your package.
+- **`README.md`**: The markdown file that provides information and instructions about the `wyn-transformers` package.
+- **`wyn_transformers`**: The main package directory containing the core Python files.
+  - **`__init__.py`**: Initializes the `wyn_transformers` package.
+  - **`transformers.py`**: Defines the Transformer model and helper functions.
+  - **`inference.py`**: Contains functions for making inferences from the trained model and converting tokens back to text.
+  - **`push_to_hub.py`**: Provides functionality to push the trained TensorFlow model to HuggingFace, requiring a HuggingFace token.
+- **`tests`**: The directory for test scripts and files.
+  - **`__init__.py`**: Initializes the tests package.
 
 ## Installation 🛠️
 
