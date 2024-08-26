@@ -5,9 +5,11 @@ A package that allows developers to train a transformer model from scratch, tail
 <details>
 <summary>📺 Click here for YouTube Tutorials</summary>
 
-1. [Introduction to wyn-transformers](https://www.youtube.com)
-2. [How to Train Your Transformer Model](https://www.youtube.com)
-3. [Deploying Models with HuggingFace Hub](https://www.youtube.com)
+1. [Introduction to wyn-transformers](https://youtu.be/D-bbwlV7arU)
+2. [Train on Custom Data Frame](https://youtu.be/IZkJwIXRao4)
+3. [How to Fine-tune Transformers](https://youtu.be/RJ-kxr5LMQA)
+4. [Push and save model to HuggingFace cloud]()
+5. [Load pre-trained transformer and train again]()
 
 *More tutorials coming soon!*
 
@@ -201,6 +203,77 @@ After the model is trained, it is usually desired to make an inference. This way
 input_text = "what is the capital of France?"
 predicted_response = predict_text(input_text, transformer, tokenizer, max_length=15)
 print("Predicted Response:", predicted_response)
+```
+
+### Push model to the cloud
+
+When you are at a good stopping point, you can use the following code to push your model to the HuggingFace cloud environment. We provide helper function `push_model_to_huggingface` to assit you to serialize the model to write the artifact, weights, and architecture to the cloud. 
+
+```python
+from wyn_transformers.push_to_hub import *
+
+# Example usage:
+huggingface_token = "HF_TOKEN_HERE"
+account_name = "HF_ACCOUNT_NAME"
+model_name = "MODEL_NAME"
+
+# Call the function to push the model
+# result = push_model_to_huggingface(huggingface_token, account_name, transformer, model_name)
+result = push_model_to_huggingface(huggingface_token, account_name, transformer, model_name, tokenizer)
+print(result)
+```
+
+### Load Pre-trained Model
+
+When you desire to load the model back, you can use the following code to load your pre-trained transformer model to continue fine-tuning.
+
+```python
+from huggingface_hub import hf_hub_download
+import tensorflow as tf
+import os
+import json
+import pickle
+
+# Define the Hugging Face model repository path
+model_repo_url = f"{account_name}/{model_name}"
+
+# Step 1: Download the model file from Hugging Face
+model_filename = f"{model_name}.keras"
+model_file_path = hf_hub_download(repo_id=model_repo_url, filename=model_filename, use_auth_token=huggingface_token)
+
+# Step 2: Load the pre-trained model from the downloaded file
+pre_trained_transformer = tf.keras.models.load_model(model_file_path, custom_objects={"TransformerModel": TransformerModel})
+
+# Step 3: Compile the model to prepare for further training
+pre_trained_transformer.compile(optimizer='adam', loss='sparse_categorical_crossentropy', metrics=['accuracy'])
+
+# Step 4: Reload the tokenizer (if used) by downloading tokenizer files from Hugging Face
+tokenizer_config_path = hf_hub_download(repo_id=model_repo_url, filename="tokenizer_config.json", use_auth_token=huggingface_token)
+vocab_path = hf_hub_download(repo_id=model_repo_url, filename="vocab.pkl", use_auth_token=huggingface_token)
+
+# Load the tokenizer configuration from the downloaded file
+with open(tokenizer_config_path, "r") as f:
+    tokenizer_config = json.load(f)
+
+# Recreate the tokenizer using TensorFlow's Tokenizer class
+from tensorflow.keras.preprocessing.text import Tokenizer
+tokenizer = Tokenizer(
+    num_words=tokenizer_config.get("num_words"),
+    filters=tokenizer_config.get("filters"),
+    lower=tokenizer_config.get("lower"),
+    split=tokenizer_config.get("split"),
+    char_level=tokenizer_config.get("char_level")
+)
+tokenizer.word_index = tokenizer_config.get("word_index")
+tokenizer.index_word = tokenizer_config.get("index_word")
+
+# Load the vocabulary from the pickle file
+with open(vocab_path, "rb") as f:
+    tokenizer.word_index = pickle.load(f)
+
+# Clean up downloaded files
+os.remove(tokenizer_config_path)
+os.remove(vocab_path)
 ```
 
 ## Author 👨‍💻
