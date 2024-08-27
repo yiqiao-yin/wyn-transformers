@@ -2,6 +2,8 @@
 
 A package that allows developers to train a transformer model from scratch, tailored for sentence-to-sentence tasks, such as question-answer pairs.
 
+Repo is [here](https://github.com/yiqiao-yin/wyn-transformers).
+
 <details>
 <summary>📺 Click here for YouTube Tutorials</summary>
 
