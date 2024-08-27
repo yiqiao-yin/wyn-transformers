@@ -8,8 +8,8 @@ A package that allows developers to train a transformer model from scratch, tail
 1. [Introduction to wyn-transformers](https://youtu.be/D-bbwlV7arU)
 2. [Train on Custom Data Frame](https://youtu.be/IZkJwIXRao4)
 3. [How to Fine-tune Transformers](https://youtu.be/RJ-kxr5LMQA)
-4. [Push and save model to HuggingFace cloud]()
-5. [Load pre-trained transformer and train again]()
+4. [Push and save model to HuggingFace cloud](https://youtu.be/CtVJuQ1knoY)
+5. [Load pre-trained transformer and train again](https://youtu.be/ZgzHg7j73Ms)
 
 *More tutorials coming soon!*
 
@@ -18,10 +18,7 @@ A package that allows developers to train a transformer model from scratch, tail
 <details>
 <summary>📓 Click here for Jupyter Notebook Examples</summary>
 
-1. [Basic Transformer Training Example](./notebooks/Basic_Transformer_Training.ipynb)
-2. [Advanced Techniques with Custom Data](./notebooks/Advanced_Techniques_with_Custom_Data.ipynb)
-3. [Inference and Evaluation Methods](./notebooks/Inference_and_Evaluation_Methods.ipynb)
-4. [Deploying to HuggingFace Hub](./notebooks/Deploying_to_HuggingFace_Hub.ipynb)
+1. [Basic Transformer Training Example](https://github.com/yiqiao-yin/WYNAssociates/blob/main/docs/ref-deeplearning/ex_%20-%20wyn-transformers%20tutorial%20-%20part%201-5.ipynb)
 
 *Check the notebooks folder in the repository for more examples.*
 
